@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <script src="./record.js"></script>
+    <script src="./pcm-player.min.js"></script>
+</head>
+<body>
+    <audio controls></audio>
+    <button onclick="rrecord()">开始录音</button>
+    <button onclick="sstopRecord()">停止录音</button> 
+    <button onclick="playaudio()">播放</button>
+    <script>
+        let audio;
+        function rrecord(){
+            record();
+        }
+        function sstopRecord(){
+           const data =  stopRecord()
+           let bytes = new Int8Array(data.length/2);
+            encodeg711(data,bytes,0);
+            audio = bytes;
+        }
+
+       function playaudio(){
+        let data = decode(audio);
+        console.log(data)
+        player(data);
+        
+    }
+    </script>
+</body>
+</html>
